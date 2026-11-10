@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     else if(req.url === '/sobre') // requisição página "Sobre"
         paginaSobre(req, res);
     else{
-        // código 404 indica erro (recusro não localizado)
+        // código 404 indica erro (recurso não localizado)
         res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8'});
         // chama a função que finaliza a conexão, enviando a resposta
         res.end("Não foi possível acessar o caminho: " + req.url);
