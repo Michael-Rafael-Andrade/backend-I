@@ -1,26 +1,26 @@
 // Neste arquivo serão definidos todos os modelos de dados da aplicação
 class Nota {
     constructor(chave, titulo, texto){
-        this.chave = chave;
-        this.titulo = titulo;
-        this.texto = texto;
+        this._chave = chave;
+        this._titulo = titulo;
+        this._texto = texto;
     }
     // Métodos Getters e Setters
     get chave(){
-        return this.chave;
+        return this._chave;
     }
     get titulo(){
-        return this.titulo;
+        return this._titulo;
     }
     get texto(){
-        return this.texto;
+        return this._texto;
     }
     set titulo(novoTitulo){
-        this.titulo = novoTitulo;
+        this._titulo = novoTitulo;
     }
     set texto(novoTexto){
-        this.texto = novoTexto;
+        this._texto = novoTexto;
     }
 }
-
+    
 module.exports = Nota;
