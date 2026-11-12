@@ -14,3 +14,12 @@ exports.tela_principal = async function(req, res){
     // renderiza o arquivo index.hbs, dentro da pasta view
     res.render('index', contexto);
 }
+
+exports.sobre = async function(req, res){
+    contexto = {
+        titulo_pagina: "Sobre o Aplicativo",
+    }
+
+    // renderiza o arquivo sobre que está dentro da pasta view
+    res.render('sobre', contexto);
+}
