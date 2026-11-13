@@ -57,3 +57,27 @@ exports.altera_get = async function(req, res){
     // renderiza o arquivo da pasta view
     res.render('alteraNota', contexto);
 }
+
+// Cria e já exporta a função que será responsável pela alteração da Nota (POST)
+exports.altera_post = async function(req, res){
+    // Obtém as informações do formulário
+    var chave = req.body.chave;
+    var titulo = req.body.titulo;
+    var texto = req.body.texto;
+
+    // atualiza a nota com a chave
+    await notas.atualiza(chave, titulo, texto);
+
+    // redireciona para a página de consulta da nota
+    res.redirect('/nota/consulta/'+chave);
+}
+
+// Cria e já exporta a função que será responsável pela exclusão da Nota
+exports.deleta = async function(req, res){
+    // informação passada como parâmetro na URL
+    var chave = req.params.chave_nota;
+    await notas.deleta(chave);
+
+    // redireciona para a página principal
+    res.redirect('/');
+}
