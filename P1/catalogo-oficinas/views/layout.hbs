@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <title>{{titulo_pagina}}</title>
+    <!-- Importação do CSS offline do Bootstrap -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css" />
+    <!-- Importação do CSS complementar da aplicação -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Configuração de design responsivo (Mobile First) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
+    <!-- Container principal do Bootstrap -->
+    <div class="container">
+      <!-- Menu superior compartilhado (Navs Fill and Justify) -->
+      <ul class="nav nav-pills nav-fill mt-3 mb-4">
+        <li class="nav-item">
+          <a class="nav-link {{#if menu_inicio}}active{{/if}}" href="/">
+            Início
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#if menu_sobre}}active{{/if}}" href="/sobre">
+            Sobre
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#if menu_nova}}active{{/if}}" href="/oficina/cria">
+            Nova Oficina
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#if menu_pesquisa}}active{{/if}}" href="/oficina/pesquisa">
+            Pesquisa
+          </a>
+        </li>
+      </ul>
+
+    <!-- Local onde o conteúdo de cada página (.hbs) será inserido -->
     {{{body}}}
-  </body>
+    </div>
+
+    <!-- Importação do JavaScript offline do Bootstrap -->
+    <script src="/javascripts/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
 </html>
