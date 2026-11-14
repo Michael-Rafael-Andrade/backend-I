@@ -8,5 +8,8 @@ var controllerIndex = require('../controller/controllerIndex.js');
 /* GET página principal */
 router.get('/', controllerIndex.tela_principal);
 
+/* GET página sobre */
+router.get('/sobre', controllerIndex.sobre);
+
 // Exporta o roteador configurado
 module.exports = router;
