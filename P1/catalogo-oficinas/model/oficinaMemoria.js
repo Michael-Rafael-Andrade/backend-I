@@ -90,7 +90,32 @@ class OficinaMemoria {
         }
     }
 
+    // Método assíncrono para pesquisar oficinas por título, responsável ou descrição
+    async pesquisa(termo) {
+        var todas = Object.values(lista_oficinas);
+        var encontradas = [];
+        var termoBusca = termo.toLowerCase().trim();
 
+        if (termoBusca === "") {
+            return encontradas;
+        }
+
+        for (var i = 0; i < todas.length; i++) {
+            var titulo = todas[i].titulo.toLowerCase();
+            var responsavel = todas[i].responsavel.toLowerCase();
+            var descricao = todas[i].descricao.toLowerCase();
+
+            if (
+                titulo.indexOf(termoBusca) !== -1 ||
+                responsavel.indexOf(termoBusca) !== -1 ||
+                descricao.indexOf(termoBusca) !== -1
+            ) {
+                encontradas.push(todas[i]);
+            }
+        }
+
+        return encontradas;
+    }
 
 }
 

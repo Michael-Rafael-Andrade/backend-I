@@ -38,7 +38,7 @@ exports.tela_principal = async function (req, res) {
     }
 
     var contexto = {
-        titulo_pagina: "Catálogo de Oficinas",
+        titulo_pagina: "Oficinas cadastradas",
         menu_inicio: true,
         todas_oficinas: true,
         apenas_abertas: false,
@@ -91,7 +91,7 @@ exports.tela_abertas = async function (req, res) {
 exports.sobre = async function (req, res) {
     // Objeto de contexto com título e indicação do menu ativo
     var contexto = {
-        titulo_pagina: "Sobre o Catálogo",
+        titulo_pagina: "Sobre o catálogo",
         autor: "Michael Rafael de Andrade",
         menu_sobre: true
     };

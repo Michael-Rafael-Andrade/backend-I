@@ -91,3 +91,37 @@ exports.deleta = async function (req, res) {
     // Redireciona para a página principal
     res.redirect('/');
 };
+
+// Renderiza a tela inicial de pesquisa (GET)
+exports.pesquisa_get = async function (req, res) {
+    var contexto = {
+        titulo_pagina: "Pesquisa de Oficinas",
+        menu_pesquisa: true,
+        realizou_pesquisa: false,
+        termo: ""
+    };
+
+    res.render('pesquisaOficina', contexto);
+};
+
+// Processa o termo pesquisado e exibe os resultados (POST)
+exports.pesquisa_post = async function (req, res) {
+    var termo = req.body.termo;
+    var resultados = await oficinas.pesquisa(termo);
+
+    var sem_resultados = false;
+    if (resultados.length === 0) {
+        sem_resultados = true;
+    }
+
+    var contexto = {
+        titulo_pagina: "Pesquisar Oficinas",
+        menu_pesquisa: true,
+        realizou_pesquisa: true,
+        termo: termo,
+        sem_resultados: sem_resultados,
+        oficinas: resultados
+    };
+
+    res.render('pesquisaOficina', contexto);
+};

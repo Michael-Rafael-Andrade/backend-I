@@ -26,6 +26,12 @@ router.get('/alterna/:id', controllerOficina.alterna);
 /* GET exclui uma oficina após confirmação modal */
 router.get('/deleta/:id', controllerOficina.deleta);
 
+/* GET tela de pesquisa de oficinas */
+router.get('/pesquisa', controllerOficina.pesquisa_get);
+
+/* POST processa a pesquisa de oficinas */
+router.post('/pesquisa', controllerOficina.pesquisa_post);
+
 
 // Exporta o roteador configurado
 module.exports = router;
