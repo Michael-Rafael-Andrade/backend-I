@@ -102,13 +102,9 @@ class OficinaMemoria {
 
         for (var i = 0; i < todas.length; i++) {
             var titulo = todas[i].titulo.toLowerCase();
-            // var responsavel = todas[i].responsavel.toLowerCase();
-            // var descricao = todas[i].descricao.toLowerCase();
 
             if (
                 titulo.indexOf(termoBusca) !== -1
-                // responsavel.indexOf(termoBusca) !== -1 ||
-                // descricao.indexOf(termoBusca) !== -1
             ) {
                 encontradas.push(todas[i]);
             }

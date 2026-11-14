@@ -3,10 +3,10 @@
 
 <!-- Área de resumo dinâmico do catálogo completo -->
 <p class="mb-3">
-    <span class="me-3">Total de oficinas: {{total_oficinas}}</span>
-    <span class="me-3">Abertas: {{total_abertas}}</span>
-    <span class="me-3">Encerradas: {{total_encerradas}}</span>
-    <span>Carga horária das abertas: {{carga_horaria_abertas}} h</span>
+    <span class="me-3">Total de oficinas:<strong> {{total_oficinas}}</strong></span>
+    <span class="me-3">Abertas:<strong> {{total_abertas}}</strong></span>
+    <span class="me-3">Encerradas:<strong> {{total_encerradas}}</strong></span>
+    <span>Carga horária das abertas:<strong> {{carga_horaria_abertas}} h</strong></span>
 </p>
 
 <!-- Opções de visualização: Todas as Oficinas e Inscrições Abertas -->
@@ -25,70 +25,70 @@
 
 <!-- Verifica se o catálogo está completamente vazio -->
 {{#if sem_oficinas}}
-<p>Nenhuma oficina cadastrada.</p>
-<p>
-    <a href="/oficina/cria">Cadastrar a primeira oficina</a>
-</p>
+    <p class="mb-4">Nenhuma oficina cadastrada.</p>
+    <a href="/oficina/cria" class="btn btn-primary">
+        Cadastrar a primeira oficina
+    </a>
 {{else}}
 <!-- Verifica se o filtro de abertas não encontrou registros -->
 {{#if sem_abertas}}
 <p>Nenhuma oficina está com inscrições abertas.</p>
 {{else}}
-<!-- Tabela Bootstrap com destaque ao passar o mouse -->
-<table class="table table-hover align-middle">
-    <thead class="table-primary text-center">
-        <tr>
-            <th>Título</th>
-            <th>Carga horária</th>
-            <th>Inscrições</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Percorre a lista de oficinas enviada pelo controller -->
-        {{#each oficinas}}
-        <tr>
-            <td><strong>{{this.titulo}}</strong></td>
-            <td class="text-center">{{this.carga_horaria}} h</td>
-            <td class="text-center">
-                {{#if this.aberta}}
-                    Abertas
-                {{else}}
-                    Encerradas
-                {{/if}}
-            </td>
-            <td class="text-center">
-                <!-- Botão Consultar -->
-                <a href="/oficina/consulta/{{this.id}}" class="btn btn-primary">
-                    Consultar
-                </a>
+    <!-- Tabela Bootstrap com destaque ao passar o mouse -->
+    <table class="table table-hover align-middle">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>Título</th>
+                <th>Carga horária</th>
+                <th>Inscrições</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Percorre a lista de oficinas enviada pelo controller -->
+            {{#each oficinas}}
+            <tr>
+                <td><strong>{{this.titulo}}</strong></td>
+                <td class="text-center">{{this.carga_horaria}} h</td>
+                <td class="text-center">
+                    {{#if this.aberta}}
+                        Abertas
+                    {{else}}
+                        Encerradas
+                    {{/if}}
+                </td>
+                <td class="text-center">
+                    <!-- Botão Consultar -->
+                    <a href="/oficina/consulta/{{this.id}}" class="btn btn-primary">
+                        Consultar
+                    </a>
 
-                <!-- Botão Editar -->
-                <a href="/oficina/altera/{{this.id}}" class="btn btn-primary">
-                    Editar
-                </a>
+                    <!-- Botão Editar -->
+                    <a href="/oficina/altera/{{this.id}}" class="btn btn-primary">
+                        Editar
+                    </a>
 
-                <!-- Botão Excluir (abre janela modal do Bootstrap) -->
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#modalExcluir{{this.id}}">
-                    Excluir
-                </button>
+                    <!-- Botão Excluir (abre janela modal do Bootstrap) -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#modalExcluir{{this.id}}">
+                        Excluir
+                    </button>
 
-                <!-- Botão Encerrar ou Reabrir conforme a situação -->
-                {{#if this.aberta}}
-                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
-                    Encerrar
-                </a>
-                {{else}}
-                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
-                    Reabrir
-                </a>
-                {{/if}}
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+                    <!-- Botão Encerrar ou Reabrir conforme a situação -->
+                    {{#if this.aberta}}
+                    <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
+                        Encerrar
+                    </a>
+                    {{else}}
+                    <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
+                        Reabrir
+                    </a>
+                    {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
 <!-- Janelas modais do Bootstrap para confirmação de exclusão -->
     {{#each oficinas}}
