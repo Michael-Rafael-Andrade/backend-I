@@ -29,6 +29,45 @@ exports.cria_post = async function (req, res) {
     res.redirect('/');
 };
 
+// Renderiza a tela de consulta com todos os detalhes da oficina (GET)
+exports.consulta = async function (req, res) {
+    var id = req.params.id;
+    var oficina = await oficinas.consulta(id);
+
+    var contexto = {
+        titulo_pagina: "Consulta de Oficina",
+        oficina: oficina
+    };
+
+    res.render('consultaOficina', contexto);
+};
+
+// Renderiza o formulário de edição preenchido com os dados atuais (GET)
+exports.altera_get = async function (req, res) {
+    var id = req.params.id;
+    var oficina = await oficinas.consulta(id);
+
+    var contexto = {
+        titulo_pagina: "Editar Oficina",
+        oficina: oficina
+    };
+
+    res.render('alteraOficina', contexto);
+};
+
+// Processa os dados atualizados do formulário de edição (POST)
+exports.altera_post = async function (req, res) {
+    var id = req.params.id;
+    var titulo = req.body.titulo;
+    var responsavel = req.body.responsavel;
+    var descricao = req.body.descricao;
+    var carga_horaria = parseInt(req.body.carga_horaria);
+
+    await oficinas.atualiza(id, titulo, responsavel, descricao, carga_horaria);
+
+    res.redirect('/');
+};
+
 // Alterna a situação da oficina entre aberta e encerrada (GET)
 exports.alterna = async function (req, res) {
     // Obtém o ID passado como parâmetro de rota

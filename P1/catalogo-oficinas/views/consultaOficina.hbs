@@ -1,0 +1,33 @@
+<!-- Título da tela de consulta -->
+<h1 class="mb-3">{{oficina.titulo}}</h1>
+
+<!-- Exibição dos detalhes completos da oficina -->
+<p class="mb-2">
+    <strong>Responsável:</strong> {{oficina.responsavel}}
+</p>
+
+<p class="mb-2">
+    <strong>Carga horária total:</strong> {{oficina.carga_horaria}} h
+</p>
+
+<p class="mb-3">
+    <strong>Situação das inscrições:</strong>
+    {{#if oficina.aberta}}
+        Abertas
+    {{else}}
+        Encerradas
+    {{/if}}
+</p>
+
+<div class="mb-4">
+    <strong>Descrição:</strong>
+    <p class="mt-1">{{oficina.descricao}}</p>
+</div>
+
+<!-- Botões de navegação e ação -->
+<a href="/oficina/altera/{{oficina.id}}" class="btn btn-primary">
+    Editar
+</a>
+<a href="/" class="btn btn-secondary">
+    Voltar
+</a>

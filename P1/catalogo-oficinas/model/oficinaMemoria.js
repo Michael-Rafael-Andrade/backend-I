@@ -54,6 +54,19 @@ class OficinaMemoria {
         }
     }
 
+    // Método assíncrono para atualizar os dados de uma oficina existente
+    async atualiza(id, titulo, responsavel, descricao, carga_horaria) {
+        if (lista_oficinas[id]) {
+            lista_oficinas[id].titulo = titulo;
+            lista_oficinas[id].responsavel = responsavel;
+            lista_oficinas[id].descricao = descricao;
+            lista_oficinas[id].carga_horaria = carga_horaria;
+            return lista_oficinas[id];
+        } else {
+            throw new Error("Oficina com o ID " + id + " não existe");
+        }
+    }
+
     // Método assíncrono para alternar a situação entre aberta e encerrada
     async alternaSituacao(id) {
         if (lista_oficinas[id]) {
@@ -76,6 +89,7 @@ class OficinaMemoria {
             throw new Error("Oficina com o ID " + id + " não existe");
         }
     }
+
 
 
 }
