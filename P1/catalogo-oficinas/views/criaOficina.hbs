@@ -1,0 +1,36 @@
+<!-- Título da tela de cadastro de oficina -->
+<h1 class="mb-3">{{titulo_pagina}}</h1>
+
+<!-- Formulário enviado via POST para a rota /oficina/cria -->
+<form method="POST" action="/oficina/cria">
+    <!-- Campo Título -->
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" required />
+    </div>
+
+    <!-- Campo Responsável -->
+    <div class="mb-3">
+        <label for="responsavel" class="form-label">Responsável</label>
+        <input type="text" class="form-control" id="responsavel" name="responsavel" required />
+    </div>
+
+    <!-- Campo Descrição com suporte a várias linhas -->
+    <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea class="form-control" id="descricao" name="descricao" rows="5" required></textarea>
+    </div>
+
+    <!-- Campo Carga horária (Number) de 1 a 40 -->
+    <div class="mb-3">
+        <label for="carga_horaria" class="form-label">
+            Carga horária total (em horas)
+        </label>
+        <input type="number" class="form-control" id="carga_horaria" name="carga_horaria" min="1" max="40" step="1"
+            required />
+    </div>
+
+    <!-- Botões de ação: Cadastrar (enviar) e Cancelar (voltar ao início) -->
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a href="/" class="btn btn-secondary">Cancelar</a>
+</form>
