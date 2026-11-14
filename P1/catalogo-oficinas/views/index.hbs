@@ -3,17 +3,10 @@
 
 <!-- Área de resumo dinâmico do catálogo completo -->
 <p class="mb-3">
-    Total de oficinas: <strong>{{total_oficinas}}</strong>
-    <span class="ms-2">
-        Abertas: <strong>{{total_abertas}}</strong>
-    </span>
-    <span class="ms-2">
-        Encerradas: <strong>{{total_encerradas}}</strong>
-    </span>
-    <span class="ms-2">
-        Carga horária das abertas:
-        <strong>{{carga_horaria_abertas}} h</strong>
-    </span>
+    <span class="me-3">Total de oficinas: {{total_oficinas}}</span>
+    <span class="me-3">Abertas: {{total_abertas}}</span>
+    <span class="me-3">Encerradas: {{total_encerradas}}</span>
+    <span>Carga horária das abertas: {{carga_horaria_abertas}} h</span>
 </p>
 
 <!-- Opções de visualização: Todas as Oficinas e Inscrições Abertas -->
@@ -66,28 +59,28 @@
             </td>
             <td class="text-center">
                 <!-- Botão Consultar -->
-                <a href="/oficina/consulta/{{this.id}}" class="btn btn-primary btn-sm">
+                <a href="/oficina/consulta/{{this.id}}" class="btn btn-primary">
                     Consultar
                 </a>
 
                 <!-- Botão Editar -->
-                <a href="/oficina/altera/{{this.id}}" class="btn btn-primary btn-sm">
+                <a href="/oficina/altera/{{this.id}}" class="btn btn-primary">
                     Editar
                 </a>
 
                 <!-- Botão Excluir (abre janela modal do Bootstrap) -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                     data-bs-target="#modalExcluir{{this.id}}">
                     Excluir
                 </button>
 
                 <!-- Botão Encerrar ou Reabrir conforme a situação -->
                 {{#if this.aberta}}
-                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary btn-sm">
+                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
                     Encerrar
                 </a>
                 {{else}}
-                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary btn-sm">
+                <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary">
                     Reabrir
                 </a>
                 {{/if}}
@@ -98,29 +91,40 @@
 </table>
 
 <!-- Janelas modais do Bootstrap para confirmação de exclusão -->
-{{#each oficinas}}
-<div class="modal fade" id="modalExcluir{{this.id}}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    {{#each oficinas}}
+      <div
+        class="modal fade"
+        id="modalExcluir{{this.id}}"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Excluir oficina</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+              <h5 class="modal-title">Excluir oficina</h5>
             </div>
             <div class="modal-body">
-                Confirma a exclusão de
-                <strong>{{this.titulo}}</strong>?
+              Confirma a exclusão de
+              <strong>{{this.titulo}}</strong>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <a href="/oficina/deleta/{{this.id}}" class="btn btn-danger">
-                    Confirmar
-                </a>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <a
+                href="/oficina/deleta/{{this.id}}"
+                class="btn btn-danger"
+              >
+                Confirmar
+              </a>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-{{/each}}
-{{/if}}
+      </div>
+    {{/each}}
+  {{/if}}
 {{/if}}

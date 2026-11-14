@@ -2,12 +2,12 @@
 var Oficina = require('./oficina.js');
 
 // Vetor em memória que armazena os objetos das oficinas
-const lista_oficinas = []; // começa com uma lista de vetor vazio
+const lista_oficinas = []; // começa com uma lista de vetor vazio para oficinas
 
 // Contador sequencial para gerar IDs numéricos únicos
 var proximo_id = 1;
 
-// Classe responsável por gerenciar as oficinas em memória
+// Classe responsável por gerenciar as oficinas em memória e simular um ORM
 class OficinaMemoria {
     // Método assíncrono para cadastrar uma nova oficina
     async cria(titulo, responsavel, descricao, carga_horaria) {
@@ -50,7 +50,7 @@ class OficinaMemoria {
         if (lista_oficinas[id]) {
             return lista_oficinas[id];
         } else {
-            throw new Error("Oficina com o ID " + id + " não existe");
+            throw new Error(`Oficina com o ID ${id} não existe`);
         }
     }
 
@@ -63,7 +63,7 @@ class OficinaMemoria {
             lista_oficinas[id].carga_horaria = carga_horaria;
             return lista_oficinas[id];
         } else {
-            throw new Error("Oficina com o ID " + id + " não existe");
+            throw new Error(`Oficina com o ID ${id} não existe`);
         }
     }
 
@@ -77,7 +77,7 @@ class OficinaMemoria {
             }
             return lista_oficinas[id];
         } else {
-            throw new Error("Oficina com o ID " + id + " não existe");
+            throw new Error(`Oficina com o ID ${id} não existe`);
         }
     }
 
@@ -86,7 +86,7 @@ class OficinaMemoria {
         if (lista_oficinas[id]) {
             delete lista_oficinas[id];
         } else {
-            throw new Error("Oficina com o ID " + id + " não existe");
+            throw new Error(`Oficina com o ID ${id} não existe`);
         }
     }
 
@@ -102,13 +102,13 @@ class OficinaMemoria {
 
         for (var i = 0; i < todas.length; i++) {
             var titulo = todas[i].titulo.toLowerCase();
-            var responsavel = todas[i].responsavel.toLowerCase();
-            var descricao = todas[i].descricao.toLowerCase();
+            // var responsavel = todas[i].responsavel.toLowerCase();
+            // var descricao = todas[i].descricao.toLowerCase();
 
             if (
-                titulo.indexOf(termoBusca) !== -1 ||
-                responsavel.indexOf(termoBusca) !== -1 ||
-                descricao.indexOf(termoBusca) !== -1
+                titulo.indexOf(termoBusca) !== -1
+                // responsavel.indexOf(termoBusca) !== -1 ||
+                // descricao.indexOf(termoBusca) !== -1
             ) {
                 encontradas.push(todas[i]);
             }
@@ -119,7 +119,7 @@ class OficinaMemoria {
 
 }
 
-// Instancia e exporta o objeto gerenciador
+// cria um objeto do tipo OficinaMemoria que será utilizado para gerenciar as oficinas
 var oficinas = new OficinaMemoria();
 
 module.exports = oficinas;

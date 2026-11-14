@@ -2,103 +2,33 @@
 <h1 class="mb-3">{{titulo_pagina}}</h1>
 
 <!-- Formulário de pesquisa enviado via POST -->
-<form method="POST" action="/oficina/pesquisa" class="mb-4">
+<form method="POST" action="/oficina/pesquisa" class="mb-3">
     <div class="mb-3">
         <label for="termo" class="form-label">
             Título da oficina
         </label>
-        <input type="text" class="form-control" id="termo" name="termo" value="{{termo}}"
-            placeholder="Digite o texto que deseja pesquisar" required />
+        <input type="text" class="form-control" id="termo" name="termo" value="{{termo}}" required />
     </div>
 
     <button type="submit" class="btn btn-primary">Pesquisar</button>
-    <a href="/oficina/pesquisa" class="btn btn-secondary">Limpar</a>
 </form>
 
-<!-- Exibe o bloco abaixo somente após o envio de uma pesquisa -->
+
+
+<!-- Exibe instrução antes da primeira pesquisa ou o resultado após pesquisar -->
 {{#if realizou_pesquisa}}
-{{#if sem_resultados}}
-<p>Nenhuma oficina encontrada para o termo pesquisado.</p>
+  {{#if sem_resultados}}
+    <p>Nenhuma oficina encontrada.</p>
+  {{else}}
+    <!-- Lista simples com links para a consulta de cada oficina -->
+    <ul>
+      {{#each oficinas}}
+        <li>
+          <a href="/oficina/consulta/{{this.id}}">{{this.titulo}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 {{else}}
-<!-- Tabela Bootstrap com os resultados encontrados -->
-<table class="table table-hover align-middle">
-    <thead class="table-primary text-center">
-        <tr>
-            <th>Título</th>
-            <th>Carga horária</th>
-            <th>Inscrições</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each oficinas}}
-        <tr>
-            <td><strong>{{this.titulo}}</strong></td>
-            <td class="text-center">{{this.carga_horaria}} h</td>
-            <td class="text-center">
-                {{#if this.aberta}}
-                    Abertas
-                {{else}}
-                    Encerradas
-                {{/if}}
-            </td>
-            <td class="text-center">
-                <!-- Botão Consultar -->
-                <a href="/oficina/consulta/{{this.id}}" class="btn btn-primary btn-sm">
-                    Consultar
-                </a>
-
-                <!-- Botão Editar -->
-                <a href="/oficina/altera/{{this.id}}" class="btn btn-primary btn-sm">
-                    Editar
-                </a>
-
-                <!-- Botão Excluir (abre janela modal do Bootstrap) -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#modalExcluirPesquisa{{this.id}}">
-                    Excluir
-                </button>
-
-                <!-- Botão Encerrar ou Reabrir conforme a situação -->
-                {{#if this.aberta}}
-                    <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary btn-sm">
-                        Encerrar
-                    </a>
-                {{else}}
-                    <a href="/oficina/alterna/{{this.id}}" class="btn btn-outline-primary btn-sm">
-                        Reabrir
-                    </a>
-                {{/if}}
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
-<!-- Janelas modais do Bootstrap para confirmação de exclusão -->
-{{#each oficinas}}
-<div class="modal fade" id="modalExcluirPesquisa{{this.id}}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Excluir oficina</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                Confirma a exclusão de
-                <strong>{{this.titulo}}</strong>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <a href="/oficina/deleta/{{this.id}}" class="btn btn-danger">
-                    Confirmar
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-{{/each}}
-{{/if}}
+  <p>Digite um termo para pesquisar pelo título da oficina.</p>
 {{/if}}

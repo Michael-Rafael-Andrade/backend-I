@@ -9,7 +9,7 @@ exports.cria_get = async function (req, res) {
         menu_nova: true
     };
 
-    // Renderiza a view criaOficina.hbs
+    // Renderiza a view criaOficina.hbs passando o contexto para a view
     res.render('criaOficina', contexto);
 };
 
@@ -36,7 +36,12 @@ exports.consulta = async function (req, res) {
 
     var contexto = {
         titulo_pagina: "Consulta de Oficina",
-        oficina: oficina
+        id: oficina.id,
+        titulo: oficina.titulo,
+        responsavel: oficina.responsavel,
+        descricao: oficina.descricao,
+        carga_horaria: oficina.carga_horaria,
+        aberta: oficina.aberta
     };
 
     res.render('consultaOficina', contexto);
@@ -49,7 +54,11 @@ exports.altera_get = async function (req, res) {
 
     var contexto = {
         titulo_pagina: "Editar Oficina",
-        oficina: oficina
+        id: oficina.id,
+        titulo: oficina.titulo,
+        responsavel: oficina.responsavel,
+        descricao: oficina.descricao,
+        carga_horaria: oficina.carga_horaria
     };
 
     res.render('alteraOficina', contexto);
@@ -76,7 +85,7 @@ exports.alterna = async function (req, res) {
     // Atualiza somente a situação da oficina
     await oficinas.alternaSituacao(id);
 
-    // Retorna para a página principal
+    // Retorna (redireciona) para a página principal
     res.redirect('/');
 };
 
@@ -115,7 +124,7 @@ exports.pesquisa_post = async function (req, res) {
     }
 
     var contexto = {
-        titulo_pagina: "Pesquisar Oficinas",
+        titulo_pagina: "Pesquisa de Oficinas",
         menu_pesquisa: true,
         realizou_pesquisa: true,
         termo: termo,

@@ -71,7 +71,7 @@ exports.tela_abertas = async function (req, res) {
     }
 
     var contexto = {
-        titulo_pagina: "Catálogo de Oficinas",
+        titulo_pagina: "Oficinas cadastradas",
         menu_inicio: true,
         todas_oficinas: false,
         apenas_abertas: true,
@@ -92,7 +92,7 @@ exports.sobre = async function (req, res) {
     // Objeto de contexto com título e indicação do menu ativo
     var contexto = {
         titulo_pagina: "Sobre o catálogo",
-        autor: "Michael Rafael de Andrade",
+        autor: "Michael Rafael de Andrade", // Fiquei na dúvida se usava igual o nome do professor ou o meu nome.
         menu_sobre: true
     };
 
