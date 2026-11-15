@@ -2,21 +2,44 @@
 // Importação do módulo que gerencia as oficinas em memória
 const oficinas = require('../model/oficinaMemoria.js');
 
+// 1ª Método para calcular o resumo OBSERVAÇÃO(PORÉM VOU UTILIZAR O SEGUNDO MÉTODO PARA REPRESENTAR OS EXEMPLOS UTILIZADOS PELO PROFESSOR NO MATERIAL)
 // Função auxiliar que calcula os indicadores sobre o catálogo completo
+// function calcularResumo(todasOficinas) {
+//     var total = todasOficinas.length;
+//     var abertas = 0;
+//     var encerradas = 0;
+//     var carga_abertas = 0;
+
+//     for (var i = 0; i < todasOficinas.length; i++) {
+//         if (todasOficinas[i].aberta) {
+//             abertas = abertas + 1;
+//             carga_abertas = carga_abertas + todasOficinas[i].carga_horaria;
+//         } else {
+//             encerradas = encerradas + 1;
+//         }
+//     }
+
+//     return {
+//         total_oficinas: total,
+//         total_abertas: abertas,
+//         total_encerradas: encerradas,
+//         carga_horaria_abertas: carga_abertas
+//     };
+// }
+
+// 2ª Método escolhido para calcular o resumo (método escolhido para ficar próximo aos exemplos do material)
+// Função auxiliar que calcula os indicadores sobre o catálogo completo (com Arrow Function)
 function calcularResumo(todasOficinas) {
     var total = todasOficinas.length;
-    var abertas = 0;
-    var encerradas = 0;
-    var carga_abertas = 0;
+    var abertas = todasOficinas.filter(oficina => oficina.aberta).length;
+    var encerradas = todasOficinas.filter(oficina => !oficina.aberta).length;
 
-    for (var i = 0; i < todasOficinas.length; i++) {
-        if (todasOficinas[i].aberta) {
-            abertas = abertas + 1;
-            carga_abertas = carga_abertas + todasOficinas[i].carga_horaria;
-        } else {
-            encerradas = encerradas + 1;
-        }
-    }
+    var carga_abertas = 0;
+    todasOficinas
+        .filter(oficina => oficina.aberta)
+        .forEach(oficina => {
+            carga_abertas += oficina.carga_horaria;
+        });
 
     return {
         total_oficinas: total,

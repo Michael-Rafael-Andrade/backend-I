@@ -31,19 +31,27 @@ class OficinaMemoria {
         return Object.values(lista_oficinas);
     }
 
+    // 1ª Forma de resolver o problema OBSERVAÇÃO:(FICOU EM COMENTÁRIO POIS ESCOLHI A 2ª FORMA QUE FOI APRESENTADA NOS PRIMEIROS MATERIAIS DA DISCIPLINA, PARA FICAR MAIS PRÓXIMO AO MATERIAL)
     // Método assíncrono que retorna apenas oficinas com inscrições abertas
+    // async listaAbertas() {
+    //     var todas = Object.values(lista_oficinas);
+    //     var abertas = [];
+
+    //     for (var i = 0; i < todas.length; i++) {
+    //         if (todas[i].aberta) {
+    //             abertas.push(todas[i]);
+    //         }
+    //     }
+
+    //     return abertas;
+    // }
+
+    // 2ª Forma de resolver o problema
+    // Método assíncrono com (Arrow Function) que retorna apenas oficinas com inscrições abertas
     async listaAbertas() {
-        var todas = Object.values(lista_oficinas);
-        var abertas = [];
-
-        for (var i = 0; i < todas.length; i++) {
-            if (todas[i].aberta) {
-                abertas.push(todas[i]);
-            }
-        }
-
-        return abertas;
+        return Object.values(lista_oficinas).filter(oficina => oficina.aberta);
     }
+
 
     // Método assíncrono para consultar uma oficina pelo ID
     async consulta(id) {
@@ -90,29 +98,43 @@ class OficinaMemoria {
         }
     }
 
+    // 1ª FORMA DE SOLUCIONAR O PROBLEMA OBSERVAÇÃO: (ESCOLHI A SEGUNDA FORMA DE RESOLVER O PROBLEMA PARA FICAR MAIS PRÓXIMO AO MATERIAL APRESENTADO PELO PROFESSOR)
     // Método assíncrono para pesquisar oficinas por título, responsável ou descrição
+    // async pesquisa(termo) {
+    //     var todas = Object.values(lista_oficinas);
+    //     var encontradas = [];
+    //     var termoBusca = termo.toLowerCase().trim();
+
+    //     if (termoBusca === "") {
+    //         return encontradas;
+    //     }
+
+    //     for (var i = 0; i < todas.length; i++) {
+    //         var titulo = todas[i].titulo.toLowerCase();
+
+    //         if (
+    //             titulo.indexOf(termoBusca) !== -1
+    //         ) {
+    //             encontradas.push(todas[i]);
+    //         }
+    //     }
+
+    //     return encontradas;
+    // }
+
+    // 2ª FORMA ESCOLHIDA PARA 'pesquisa' DE ACORDO COM O MATERIAL DO PROFESSOR
+    // Método assíncrono para pesquisar oficinas pelo título
     async pesquisa(termo) {
-        var todas = Object.values(lista_oficinas);
-        var encontradas = [];
-        var termoBusca = termo.toLowerCase().trim();
+        const termoBusca = (termo || '').toLowerCase().trim();
 
-        if (termoBusca === "") {
-            return encontradas;
+        if (termoBusca === '') {
+            return [];
         }
 
-        for (var i = 0; i < todas.length; i++) {
-            var titulo = todas[i].titulo.toLowerCase();
-
-            if (
-                titulo.indexOf(termoBusca) !== -1
-            ) {
-                encontradas.push(todas[i]);
-            }
-        }
-
-        return encontradas;
+        return Object.values(lista_oficinas).filter(oficina =>
+            oficina.titulo.toLowerCase().includes(termoBusca)
+        );
     }
-
 }
 
 // cria um objeto do tipo OficinaMemoria que será utilizado para gerenciar as oficinas
